@@ -1,5 +1,16 @@
 <template name="game">
-
+  <h1>{{name}}</h1>
+  <p>
+    token: {{_id}}
+  </p>
+  <h2>Records</h2>
+  <ul>
+    {{#each records}}
+      <li>
+        {{createdAt}}: {{#with event}}{{type}}{{/with}}
+      </li>
+    {{/each}}
+  </ul>
 </template>
 
 <template name="createGameForm">

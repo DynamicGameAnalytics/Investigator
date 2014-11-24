@@ -1,10 +1,11 @@
 Router.route('/session_token/:game_token', {
-  where: 'server'
+  where: 'server',
+  name: 'session_token'
 })
 .get(function() {
   var game_token = this.params.game_token;
   var game = Games.findOne({
-    token: game_token
+    _id: game_token
   });
   if (!game) {
     this.response.statusCode = 400;
