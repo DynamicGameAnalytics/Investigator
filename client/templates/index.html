@@ -1,0 +1,11 @@
+<template name="index">
+  <h1>My games</h1>
+  <ul>
+    {{#each games}}
+    <li>
+      {{name}}: {{_id}}, {{createdAt}}, {{updatedAt}}
+    </li>
+    {{/each}}
+  </ul>
+  {{> createGameForm}} {{> signOut}}
+</template>

@@ -1,0 +1,17 @@
+<template name="signIn">
+  <p>
+    Please sign in to continue!
+  </p>
+  {{> signInForm}}
+  <p>
+    <a href="/sign_up">sign up</a>
+  </p>
+</template>
+
+<template name="signInForm">
+  <form action="/">
+    <input type="email" name="email">
+    <input type="password" name="password">
+    <input type="submit" value="sign up">
+  </form>
+</template>
