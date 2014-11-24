@@ -7,8 +7,17 @@
   <ul>
     {{#each records}}
       <li>
-        {{createdAt}}: {{#with event}}{{type}}{{/with}}
+        {{fromNow createdAt}}: {{event.type}}
       </li>
+    {{/each}}
+  </ul>
+
+  <h2>Errors</h2>
+  <ul>
+    {{#each errors}}
+    <li>
+      {{fromNow createdAt}}: {{error.type}}
+    </li>
     {{/each}}
   </ul>
 </template>

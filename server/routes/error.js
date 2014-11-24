@@ -1,18 +1,15 @@
-Router.route('/event/:session_token', {
+Router.route('/error/:session_token', {
     where: 'server',
-    name: 'event'
+    name: 'error'
   })
   .post(function() {
     var session_token = this.params.session_token;
+    var errorData = this.request.body.error;
 
-    // var eventString = this.request.body.event;
-    // var eventData = JSON.parse(eventString);
-    var eventData = this.request.body.event;
-
-    if (!eventData) {
+    if (!errorData) {
       this.response.statusCode = 400;
       return this.response.end(JSON.stringify({
-        error: 'event object required'
+        error: 'error object required'
       }));
     }
 
@@ -24,10 +21,10 @@ Router.route('/event/:session_token', {
       }));
     }
 
-    Records.insert({
+    Errors.insert({
       game: session.game_token,
       session: session._id,
-      event: eventData
+      error: errorData
     });
-    this.response.end(JSON.stringify(eventData));
+    this.response.end(JSON.stringify(errorData));
   });

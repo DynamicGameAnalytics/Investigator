@@ -10,4 +10,8 @@ iron:router
 jaywon:meteor-node-uuid
 accounts-password
 aldeed:collection2
+mquandalle:bower
+accounts-ui
+service-configuration
+accounts-github
 

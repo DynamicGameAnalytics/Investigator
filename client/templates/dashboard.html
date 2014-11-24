@@ -1,0 +1,11 @@
+<template name="dashboard">
+  <h1>My games</h1>
+  <ul>
+    {{#each games}}
+    <li>
+      <a href="game/{{_id}}">{{name}}</a>
+    </li>
+    {{/each}}
+  </ul>
+  {{> createGameForm}}
+</template>
