@@ -14,4 +14,7 @@ mquandalle:bower
 accounts-ui
 service-configuration
 accounts-github
+accounts-google
+accounts-facebook
+accounts-twitter
 
