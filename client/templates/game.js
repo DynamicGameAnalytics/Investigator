@@ -19,8 +19,17 @@ Template.createGameForm.events({
   }
 });
 
-Template.game.rendered = function() {
+function redrawRecordsGraph() {
   var start = moment();
+
+  var dataStart = moment().subtract(1, Session.get('graphs.records.dataInterval'));
+  var dataEnd = moment();
+  var records = Records.find({
+    createdAt: {
+      "$gte": dataStart.toDate(),
+      "$lt": dataEnd.toDate()
+    }
+  });
 
   var palette = new Rickshaw.Color.Palette({
     scheme: 'colorwheel'
@@ -28,15 +37,17 @@ Template.game.rendered = function() {
 
   var rawData = {};
 
-  this.data.records.forEach(function(record) {
+  rawData.timeScaler = {};
+  rawData.timeScaler[dataStart.toISOString()] = 0;
+  rawData.timeScaler[dataEnd.toISOString()] = 0;
+
+  records.forEach(function(record) {
     var type = record.event.type;
-    var time = moment(record.createdAt);
-    time.milliseconds(0);
-    time.seconds(0);
+    var time = moment(record.createdAt).startOf(Session.get('graphs.records.dataUnit'));
 
     var timeString = time.toISOString();
-    var timeBefore = time.subtract(1, 'm').toISOString();
-    var timeAfter = time.add(2, 'm').toISOString();
+    var timeBefore = time.subtract(1, Session.get('graphs.records.dataUnit')).toISOString();
+    var timeAfter = time.add(2, Session.get('graphs.records.dataUnit')).toISOString();
     // console.log(timeString);
     // console.log(timeAfter);
     rawData[type] = rawData[type] || {};
@@ -81,10 +92,12 @@ Template.game.rendered = function() {
 
   // console.log(series);
 
+  var element = document.querySelector('#records-graph');
+  element.innerHTML = '';
   var graph = new Rickshaw.Graph({
-    element: document.querySelector('#records-graph'),
+    element: element,
     renderer: 'bar',
-    // interpolation: 'linear',
+    interpolation: 'linear',
     // stack: false,
     series: series
   });
@@ -109,4 +122,22 @@ Template.game.rendered = function() {
   graph.render();
   var end = moment();
   console.log('graph rendering took ' + end.diff(start) + 'ms');
+}
+
+
+Template.game.rendered = function() {
+  var oldInterval = undefined;
+  Session.setDefault('graphs.records.dataUnit', 'm');
+  Session.setDefault('graphs.records.dataInterval', 'h');
+  Session.setDefault('graphs.records.updateInterval', 'm');
+
+  Tracker.autorun(function(){
+    if (oldInterval){
+      Meteor.clearInterval(oldInterval);
+    }
+    var interval = moment.duration(1, Session.get('graphs.records.updateInterval'));
+    oldInterval = Meteor.setInterval(redrawRecordsGraph, interval.asMilliseconds());
+  });
+
+  Tracker.autorun(redrawRecordsGraph);
 };
