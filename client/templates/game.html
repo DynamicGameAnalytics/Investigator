@@ -4,13 +4,15 @@
     token: {{_id}}
   </p>
   <h2>Records</h2>
-  <ul>
+  <!-- <ul>
     {{#each records}}
       <li>
         {{fromNow createdAt}}: {{event.type}}
       </li>
     {{/each}}
-  </ul>
+  </ul> -->
+  <div id="records-graph"></div>
+  <!-- <div id="records-slider"></div> -->
 
   <h2>Errors</h2>
   <ul>
@@ -22,9 +24,10 @@
   </ul>
 </template>
 
-<template name="createGameForm">
-  <form>
+<template name="insertGameForm">
+  <!-- <form>
     <input type="text" name="name">
     <input type="submit" value="create game">
-  </form>
+  </form> -->
+  {{> quickForm collection="Games" id="insertGameForm" type="insert" omitFields="createdAt, owner" buttonContent="create"}}
 </template>
