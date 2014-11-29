@@ -8,4 +8,13 @@
     {{/each}}
   </ul>
   {{> insertGameForm}}
+
+  <h2>Public games</h2>
+  	<ul>
+    {{#each publicGames}}
+    <li>
+      <a href="game/{{_id}}">{{name}}</a>
+    </li>
+    {{/each}}
+  </ul>
 </template>
