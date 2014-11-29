@@ -24,9 +24,10 @@
   </ul>
 </template>
 
-<template name="createGameForm">
-  <form>
+<template name="insertGameForm">
+  <!-- <form>
     <input type="text" name="name">
     <input type="submit" value="create game">
-  </form>
+  </form> -->
+  {{> quickForm collection="Games" id="insertGameForm" type="insert" omitFields="createdAt, owner" buttonContent="create"}}
 </template>
