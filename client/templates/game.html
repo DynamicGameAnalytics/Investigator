@@ -11,6 +11,64 @@
       </li>
     {{/each}}
   </ul> -->
+  Show data for the last
+  <select id="recordsGraphDataInterval">
+    <option value="m" selected={{sessionEquals "graphs.records.dataInterval" "m"}}>
+      Minute
+    </option>
+    <option value="h" selected={{sessionEquals "graphs.records.dataInterval" "h"}}>
+      Hour
+    </option>
+    <option value="d" selected={{sessionEquals "graphs.records.dataInterval" "d"}}>
+      Day
+    </option>
+    <option value="w" selected={{sessionEquals "graphs.records.dataInterval" "w"}}>
+      Week
+    </option>
+    <option value="M" selected={{sessionEquals "graphs.records.dataInterval" "M"}}>
+      Month
+    </option>
+    <option value="y" selected={{sessionEquals "graphs.records.dataInterval" "y"}}>
+      Year
+    </option>
+  </select>
+  , auto-update every
+  <select id="recordsGraphUpdateInterval">
+    <option value="s" selected={{sessionEquals "graphs.records.updateInterval" "s"}}>
+      Second
+    </option>
+    <option value="m" selected={{sessionEquals "graphs.records.updateInterval" "m"}}>
+      Minute
+    </option>
+    <option value="h" selected={{sessionEquals "graphs.records.updateInterval" "h"}}>
+      Hour
+    </option>
+  </select>
+  , group data by
+  <select id="recordsGraphDataUnit">
+    <option value="s" selected={{sessionEquals "graphs.records.dataUnit" "s"}}>
+      Second
+    </option>
+    <option value="m" selected={{sessionEquals "graphs.records.dataUnit" "m"}}>
+      Minute
+    </option>
+    <option value="h" selected={{sessionEquals "graphs.records.dataUnit" "h"}}>
+      Hour
+    </option>
+    <option value="d" selected={{sessionEquals "graphs.records.dataUnit" "d"}}>
+      Day
+    </option>
+    <option value="w" selected={{sessionEquals "graphs.records.dataUnit" "w"}}>
+      Week
+    </option>
+    <option value="M" selected={{sessionEquals "graphs.records.dataUnit" "M"}}>
+      Month
+    </option>
+    <option value="y" selected={{sessionEquals "graphs.records.dataUnit" "y"}}>
+      Year
+    </option>
+  </select>
+
   <div id="records-graph"></div>
   <!-- <div id="records-slider"></div> -->
 

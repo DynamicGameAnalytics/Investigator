@@ -43,13 +43,14 @@ function redrawRecordsGraph() {
 
   records.forEach(function(record) {
     var type = record.event.type;
-    var time = moment(record.createdAt).startOf(Session.get('graphs.records.dataUnit'));
+    var dataUnit = Session.get('graphs.records.dataUnit');
+    var time = moment(record.createdAt).startOf(dataUnit);
 
     var timeString = time.toISOString();
-    var timeBefore = time.subtract(1, Session.get('graphs.records.dataUnit')).toISOString();
-    var timeAfter = time.add(2, Session.get('graphs.records.dataUnit')).toISOString();
-    // console.log(timeString);
-    // console.log(timeAfter);
+    var timeBefore = time.subtract(1, dataUnit).toISOString();
+    var timeAfter = time.add(2, dataUnit).toISOString();
+    // console.log("time: " + timeString);
+    // console.log("after: " + timeAfter);
     rawData[type] = rawData[type] || {};
     rawData[type][timeBefore] = rawData[type][timeBefore] || 0;
     rawData[type][timeString] = rawData[type][timeString] || 0;
@@ -96,7 +97,7 @@ function redrawRecordsGraph() {
   element.innerHTML = '';
   var graph = new Rickshaw.Graph({
     element: element,
-    renderer: 'bar',
+    // renderer: 'bar',
     interpolation: 'linear',
     // stack: false,
     series: series
@@ -158,6 +159,15 @@ Template.game.events({
       template.find(".toggleIsSharableByLink").checked = true;
     }
     console.log("IsPublic changed");
+  },
+  "change #recordsGraphDataUnit": function(event, template){
+    Session.set("graphs.records.dataUnit", event.target.value);
+  },
+  "change #recordsGraphUpdateInterval": function(event, template){
+    Session.set("graphs.records.updateInterval", event.target.value);
+  },
+  "change #recordsGraphDataInterval": function(event, template){
+    Session.set("graphs.records.dataInterval", event.target.value);
   }
 
 });
