@@ -141,3 +141,29 @@ Template.game.rendered = function() {
 
   Tracker.autorun(redrawRecordsGraph);
 };
+
+Template.game.events({
+  "click .toggleIsSharableByLink": function (event, template) { 
+    Games.update(this._id, {$set: {isSharableByLink: ! this.isSharableByLink}});
+    if(this.isSharableByLink){
+      Games.update(this._id, {$set: {isPublic: false}});
+      template.find(".toggleIsPublic").checked = false;
+    }
+    console.log("IsSharableByLink changed");
+  },
+  "click .toggleIsPublic": function (event, template) { 
+    Games.update(this._id, {$set: {isPublic: ! this.isPublic}});
+    if(! this.isPublic){     
+      Games.update(this._id, {$set: {isSharableByLink: true}});
+      template.find(".toggleIsSharableByLink").checked = true;
+    }
+    console.log("IsPublic changed");
+  }
+
+});
+
+Template.game.helpers({
+    isOwner: function () {
+      return this.owner === Meteor.userId();
+    }
+});
