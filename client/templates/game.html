@@ -29,5 +29,5 @@
     <input type="text" name="name">
     <input type="submit" value="create game">
   </form> -->
-  {{> quickForm collection="Games" id="insertGameForm" type="insert" omitFields="createdAt, owner" buttonContent="create"}}
+  {{> quickForm collection="Games" id="insertGameForm" type="insert" fields="name" buttonContent="create"}}
 </template>
