@@ -143,7 +143,7 @@ Template.game.rendered = function() {
 };
 
 Template.game.events({
-  "click .toggleIsSharableByLink": function (event, template) { 
+  "click .toggleIsSharableByLink": function (event, template) {
     Games.update(this._id, {$set: {isSharableByLink: ! this.isSharableByLink}});
     if(this.isSharableByLink){
       Games.update(this._id, {$set: {isPublic: false}});
@@ -151,9 +151,9 @@ Template.game.events({
     }
     console.log("IsSharableByLink changed");
   },
-  "click .toggleIsPublic": function (event, template) { 
+  "click .toggleIsPublic": function (event, template) {
     Games.update(this._id, {$set: {isPublic: ! this.isPublic}});
-    if(! this.isPublic){     
+    if(! this.isPublic){
       Games.update(this._id, {$set: {isSharableByLink: true}});
       template.find(".toggleIsSharableByLink").checked = true;
     }

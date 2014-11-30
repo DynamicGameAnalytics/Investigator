@@ -3,7 +3,9 @@
   <ul>
     {{#each games}}
     <li>
-      <a href="game/{{_id}}">{{name}}</a>
+      {{#linkTo route="game.show" data=this}}
+        {{name}}
+      {{/linkTo}}
     </li>
     {{/each}}
   </ul>
@@ -13,7 +15,9 @@
   	<ul>
     {{#each publicGames}}
     <li>
-      <a href="game/{{_id}}">{{name}}</a>
+      {{#linkTo route="game.show" data=this}}
+        {{name}}
+      {{/linkTo}}
     </li>
     {{/each}}
   </ul>

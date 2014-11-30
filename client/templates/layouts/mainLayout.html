@@ -1,0 +1,11 @@
+<template name="mainLayout">
+  <header>
+    {{> loginButtons}}
+    {{#linkTo route="dashboard"}}
+      Dashboard
+    {{/linkTo}}
+  </header>
+  <content>
+    {{> yield}}
+  </content>
+</template>
