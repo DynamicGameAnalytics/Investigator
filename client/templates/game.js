@@ -24,12 +24,13 @@ function redrawRecordsGraph() {
 
   var dataStart = moment().subtract(1, Session.get('graphs.records.dataInterval'));
   var dataEnd = moment();
-  var records = Records.find({
+  var query = _.defaults(Session.get("graphs.records.dataFilter"), {
     createdAt: {
       "$gte": dataStart.toDate(),
       "$lt": dataEnd.toDate()
     }
   });
+  var records = Records.find(query);
 
   var palette = new Rickshaw.Color.Palette({
     scheme: 'colorwheel'
@@ -131,9 +132,10 @@ Template.game.rendered = function() {
   Session.setDefault('graphs.records.dataUnit', 'm');
   Session.setDefault('graphs.records.dataInterval', 'h');
   Session.setDefault('graphs.records.updateInterval', 'm');
+  Session.setDefault('graphs.records.dataFilter', {});
 
-  Tracker.autorun(function(){
-    if (oldInterval){
+  Tracker.autorun(function() {
+    if (oldInterval) {
       Meteor.clearInterval(oldInterval);
     }
     var interval = moment.duration(1, Session.get('graphs.records.updateInterval'));
@@ -144,36 +146,60 @@ Template.game.rendered = function() {
 };
 
 Template.game.events({
-  "click .toggleIsSharableByLink": function (event, template) {
-    Games.update(this._id, {$set: {isSharableByLink: ! this.isSharableByLink}});
-    if(this.isSharableByLink){
-      Games.update(this._id, {$set: {isPublic: false}});
+  "click .toggleIsSharableByLink": function(event, template) {
+    Games.update(this._id, {
+      $set: {
+        isSharableByLink: !this.isSharableByLink
+      }
+    });
+    if (this.isSharableByLink) {
+      Games.update(this._id, {
+        $set: {
+          isPublic: false
+        }
+      });
       template.find(".toggleIsPublic").checked = false;
     }
     console.log("IsSharableByLink changed");
   },
-  "click .toggleIsPublic": function (event, template) {
-    Games.update(this._id, {$set: {isPublic: ! this.isPublic}});
-    if(! this.isPublic){
-      Games.update(this._id, {$set: {isSharableByLink: true}});
+  "click .toggleIsPublic": function(event, template) {
+    Games.update(this._id, {
+      $set: {
+        isPublic: !this.isPublic
+      }
+    });
+    if (!this.isPublic) {
+      Games.update(this._id, {
+        $set: {
+          isSharableByLink: true
+        }
+      });
       template.find(".toggleIsSharableByLink").checked = true;
     }
     console.log("IsPublic changed");
   },
-  "change #recordsGraphDataUnit": function(event, template){
+  "change #recordsGraphDataUnit": function(event, template) {
     Session.set("graphs.records.dataUnit", event.target.value);
   },
-  "change #recordsGraphUpdateInterval": function(event, template){
+  "change #recordsGraphUpdateInterval": function(event, template) {
     Session.set("graphs.records.updateInterval", event.target.value);
   },
-  "change #recordsGraphDataInterval": function(event, template){
+  "change #recordsGraphDataInterval": function(event, template) {
     Session.set("graphs.records.dataInterval", event.target.value);
+  },
+  "change #recordsGraphDataFilter": function(event, template) {
+    try {
+      var filter = JSON.parse(event.target.value);
+      Session.set("graphs.records.dataFilter", filter);
+    } catch (e) {
+      Session.set("graphs.records.dataFilter", {});
+    }
   }
 
 });
 
 Template.game.helpers({
-    isOwner: function () {
-      return this.owner === Meteor.userId();
-    }
+  isOwner: function() {
+    return this.owner === Meteor.userId();
+  }
 });
