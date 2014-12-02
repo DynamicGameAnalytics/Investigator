@@ -1,11 +1,11 @@
 <template name="mainLayout">
-  <header>
-    {{> loginButtons}}
-    {{#linkTo route="dashboard"}}
-      Dashboard
-    {{/linkTo}}
-  </header>
-  <content>
-    {{> yield}}
-  </content>
+  <core-header-panel flex>
+    <core-toolbar>
+      <div>{{> loginButtons}} {{#linkTo route="dashboard"}} Dashboard {{/linkTo}}
+      </div>
+    </core-toolbar>
+    <div class="content" fit>
+      {{> yield}}
+    </div>
+  </core-header-panel>
 </template>

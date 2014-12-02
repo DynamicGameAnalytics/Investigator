@@ -1,1 +1,8 @@
-/* CSS declarations go here */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+core-header-panel {
+  height: 100%;
+}
