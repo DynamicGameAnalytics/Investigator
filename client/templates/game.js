@@ -172,9 +172,8 @@ Template.game.events({
   "click .shareToUser": function(event){
     GameSharedToUser.insert({
       game: this._id,
-      shareToUser: document.getElementById("inputShareToUser").value
+      sharedToUser: document.getElementById("inputShareToUser").value
     });
-    //alert(document.getElementById("inputShareToUser").value);
     document.getElementById("inputShareToUser").value = "";
   }
 });
@@ -193,11 +192,6 @@ Template.game.settings = function() {
      {
        //token: '@',
        collection: Meteor.users,
-       /*.map(function(userr){
-          userr.oneEmail = userr.emails[0].address;          
-        }),*/
-       //field: "oneEmail",
-       //field: "emails",
        field: "emails.0.address",
        //field: "_id",
        template: Template.userPill

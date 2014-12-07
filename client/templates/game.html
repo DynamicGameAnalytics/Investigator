@@ -98,6 +98,16 @@
     </p>
     {{> inputAutocomplete settings=settings id="inputShareToUser" class="inputShareToUser" placeholder="Share to user..."}} 
     <button class="shareToUser">Share game with user</button>  
+
+
+    <ul>
+      {{#each this.gameSharedToUser}}
+      <li>
+        {{sharedToUser}}
+      </li>
+      {{/each}}
+    </ul>
+
   {{/if}}
 </template>
 
