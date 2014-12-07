@@ -96,6 +96,8 @@
           Is public for everyone
       </label>
     </p>
+    {{> inputAutocomplete settings=settings id="inputShareToUser" class="inputShareToUser" placeholder="Share to user..."}} 
+    <button class="shareToUser">Share game with user</button>  
   {{/if}}
 </template>
 
@@ -105,4 +107,8 @@
     <input type="submit" value="create game">
   </form> -->
   {{> quickForm collection="Games" id="insertGameForm" type="insert" fields="name" buttonContent="create"}}
+</template>
+
+<template name="userPill">
+    <span class="label">{{getEmail}}</span>
 </template>

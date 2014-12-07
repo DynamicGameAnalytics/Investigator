@@ -168,12 +168,46 @@ Template.game.events({
   },
   "change #recordsGraphDataInterval": function(event, template){
     Session.set("graphs.records.dataInterval", event.target.value);
+  },
+  "click .shareToUser": function(event){
+    GameSharedToUser.insert({
+      game: this._id,
+      shareToUser: document.getElementById("inputShareToUser").value
+    });
+    //alert(document.getElementById("inputShareToUser").value);
+    document.getElementById("inputShareToUser").value = "";
   }
-
 });
 
 Template.game.helpers({
     isOwner: function () {
       return this.owner === Meteor.userId();
     }
+});
+
+Template.game.settings = function() {
+  return {
+   position: "top",
+   limit: 1,
+   rules: [
+     {
+       //token: '@',
+       collection: Meteor.users,
+       /*.map(function(userr){
+          userr.oneEmail = userr.emails[0].address;          
+        }),*/
+       //field: "oneEmail",
+       //field: "emails",
+       field: "emails.0.address",
+       //field: "_id",
+       template: Template.userPill
+     },
+   ]
+  }
+};
+
+Template.userPill.helpers({
+  getEmail: function(){
+    return this.emails[0].address;
+  }
 });
