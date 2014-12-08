@@ -96,14 +96,15 @@
           Is public for everyone
       </label>
     </p>
+
+    <h3>Share to specific user</h3>
     {{> inputAutocomplete settings=settings id="inputShareToUser" class="inputShareToUser" placeholder="Share to user..."}} 
     <button class="shareToUser">Share game with user</button>  
-
 
     <ul>
       {{#each this.gameSharedToUser}}
       <li>
-        {{sharedToUser}}
+        {{sharedToUser}} <button class="deleteShare">&times;</button>
       </li>
       {{/each}}
     </ul>

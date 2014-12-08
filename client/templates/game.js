@@ -171,13 +171,18 @@ Template.game.events({
   },
   "click .shareToUser": function(event){
     var email = document.getElementById("inputShareToUser").value;
-    var userToShare = Meteor.users.findOne({"emails.address": email});
 
     GameSharedToUser.insert({
       game: this._id,
-      sharedToUser: userToShare._id
+      sharedToUser: email
     });
     document.getElementById("inputShareToUser").value = "";
+  },
+  "click .deleteShare": function(event){
+    alert(this._id +" "+ this.sharedToUser);
+    GameSharedToUser.remove({
+      _id: this._id
+    });
   }
 });
 
