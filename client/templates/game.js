@@ -170,9 +170,12 @@ Template.game.events({
     Session.set("graphs.records.dataInterval", event.target.value);
   },
   "click .shareToUser": function(event){
+    var email = document.getElementById("inputShareToUser").value;
+    var userToShare = Meteor.users.findOne({"emails.address": email});
+
     GameSharedToUser.insert({
       game: this._id,
-      sharedToUser: document.getElementById("inputShareToUser").value
+      sharedToUser: userToShare._id
     });
     document.getElementById("inputShareToUser").value = "";
   }

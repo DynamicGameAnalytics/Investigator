@@ -11,6 +11,19 @@
   </ul>
   {{> insertGameForm}}
 
+
+  <h2>Games shared to me </h2>
+    <ul>
+    {{#each gameSharedToMe}}
+    <li>
+      {{#linkTo route="game.show" data=this}}
+        {{name}}
+      {{/linkTo}}
+    </li>
+    {{/each}}
+  </ul>
+
+
   <h2>Public games</h2>
   	<ul>
     {{#each publicGames}}
