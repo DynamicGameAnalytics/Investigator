@@ -171,15 +171,16 @@ Template.game.events({
   },
   "click .shareToUser": function(event){
     var email = document.getElementById("inputShareToUser").value;
-
-    GameSharedToUser.insert({
-      game: this._id,
-      sharedToUser: email
-    });
+    if(GameSharedToUser.find({game: this._id, sharedToUser: email}).count()===0 ){
+      GameSharedToUser.insert({
+        game: this._id,
+        sharedToUser: email
+      });
+    }
     document.getElementById("inputShareToUser").value = "";
   },
   "click .deleteShare": function(event){
-    alert(this._id +" "+ this.sharedToUser);
+    //alert(this._id +" "+ this.sharedToUser);
     GameSharedToUser.remove({
       _id: this._id
     });
