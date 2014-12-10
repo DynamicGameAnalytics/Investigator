@@ -196,21 +196,15 @@ Template.game.helpers({
 Template.game.settings = function() {
   return {
    position: "top",
-   limit: 1,
+   limit: 5,
    rules: [
      {
        //token: '@',
        collection: Meteor.users,
-       field: "emails.0.address",
+       field: "publicUsername",
        //field: "_id",
        template: Template.userPill
      },
    ]
   }
 };
-
-Template.userPill.helpers({
-  getEmail: function(){
-    return this.emails[0].address;
-  }
-});
