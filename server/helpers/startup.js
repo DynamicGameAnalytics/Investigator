@@ -7,4 +7,7 @@ Meteor.startup(function () {
 			Meteor.users.update({_id: user._id}, {$set : {publicUsername: publicUsername}});			
 		}
 	});
-});
+
+	Houston.add_collection(Meteor.users);
+	Houston.add_collection(Houston._admins);
+}); 
