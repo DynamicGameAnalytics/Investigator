@@ -18,6 +18,10 @@ core-header-panel {
   margin-right: 16px;
 }
 
+.chart {
+  width: 100%;
+}
+
 .games {
   margin-right: -16px;
 }
