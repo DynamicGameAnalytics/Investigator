@@ -2,6 +2,7 @@
   {{#contentFor "title"}} Dashboard {{/contentFor}}
 
   <h1>My games</h1>
+  {{#if games}}
   <div class="games" horizontal layout wrap>
     {{#each games}}
     <paper-card class="game-card" z=1>
@@ -10,21 +11,40 @@
       <paper-item>
         {{#linkTo route="game.show" data=this}}Details{{/linkTo}}
       </paper-item>
-      <paper-item>
-        {{#linkTo route="game.show" data=this}}Action{{/linkTo}}
-      </paper-item>
     </paper-card>
     {{/each}}
 
   </div>
+  {{/if}}
   {{> insertGameForm}}
 
-  <h2>Public games</h2>
-  <ul>
-    {{#each publicGames}}
-    <li>
-      {{#linkTo route="game.show" data=this}} {{name}} {{/linkTo}}
-    </li>
+  {{#if gameSharedToMe.count}}
+  <h2>Games shared with me </h2>
+  <div class="games">
+    {{#each gameSharedToMe}}
+    <paper-card class="game-card" z=1>
+      <img src="http://placehold.it/1920x1080" />
+      <h1>{{name}}</h1>
+      <paper-item>
+        {{#linkTo route="game.show" data=this}}Details{{/linkTo}}
+      </paper-item>
+    </paper-card>
     {{/each}}
-  </ul>
+  </div>
+  {{/if}}
+
+  {{#if publicGames.count}}
+  <h2>Public games</h2>
+  <div class="games">
+    {{#each publicGames}}
+    <paper-card class="game-card" z=1>
+      <img src="http://placehold.it/1920x1080" />
+      <h1>{{name}}</h1>
+      <paper-item>
+        {{#linkTo route="game.show" data=this}}Details{{/linkTo}}
+      </paper-item>
+    </paper-card>
+    {{/each}}
+  </div>
+  {{/if}}
 </template>

@@ -168,12 +168,55 @@ Template.game.events({
   },
   "change #recordsGraphDataInterval": function(event, template){
     Session.set("graphs.records.dataInterval", event.target.value);
+  },
+  "click .shareToUser": function(event){
+    var email = document.getElementById("inputShareToUser").value;
+    if(GameSharedToUser.find({game: this._id, sharedToUser: email}).count()===0 ){
+      GameSharedToUser.insert({
+        game: this._id,
+        sharedToUser: email
+      });
+    }
+    document.getElementById("inputShareToUser").value = "";
+  },
+  "click .deleteShare": function(event){
+    //alert(this._id +" "+ this.sharedToUser);
+    GameSharedToUser.remove({
+      _id: this._id
+    });
   }
-
 });
 
 Template.game.helpers({
     isOwner: function () {
       return this.owner === Meteor.userId();
     }
+});
+
+Template.game.settings = function() {
+  return {
+   position: "top",
+   limit: 5,
+   rules: [
+     {
+       //token: '@',
+       collection: Meteor.users,
+       field: "publicUsername",
+       //field: "_id",
+       template: Template.userPill
+     },
+   ]
+  }
+};
+
+Template.deleteGame.helpers({
+  beforeRemove: function () {
+    return function (collection, id) {
+      var doc = collection.findOne(id);
+      if (confirm('Really delete game "' + doc.name + '"?')) {
+        this.remove();
+        Router.go("/");
+      }
+    };
+  }
 });

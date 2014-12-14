@@ -1,0 +1,21 @@
+<template name="loginLayout">
+  <!-- <core-scaffold> -->
+  <core-header-panel navigation flex mode="seamed">
+    <core-toolbar>Investigator</core-toolbar>
+    <!-- <core-menu>
+        <core-item icon="dashboard" label="Dashboard">
+          {{#linkTo route="dashboard"}}{{/linkTo}}
+        </core-item>
+        <core-item icon="add" label="New Game">
+          {{#linkTo route="newGame"}}{{/linkTo}}
+        </core-item>
+      </core-menu> -->
+    <div class="content" fit>
+      {{> yield}}
+    </div>
+  </core-header-panel>
+  <!-- <div tool flex>
+      {{> yield "title"}}
+    </div> -->
+  <!-- </core-scaffold> -->
+</template>

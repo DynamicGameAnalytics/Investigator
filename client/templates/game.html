@@ -95,6 +95,23 @@
         <input type="checkbox" checked="{{isPublic}}" class="toggleIsPublic" /> Is public for everyone
       </label>
     </p>
+
+    <h3>Share to specific user</h3>
+    <div>
+      {{> inputAutocomplete settings=settings id="inputShareToUser" class="inputShareToUser" placeholder="Share to user..."}}
+      <button class="shareToUser">Share game with user</button>
+
+      <ul>
+        {{#each this.gameSharedToUser}}
+        <li>
+          {{sharedToUser}}
+          <button class="deleteShare">&times;</button>
+        </li>
+        {{/each}}
+      </ul>
+
+    </div>
+    {{> updateGame}} {{> deleteGame}}
   </paper-card>
   {{/if}}
 </template>
@@ -105,4 +122,24 @@
     <input type="submit" value="create game">
   </form> -->
   {{> quickForm collection="Games" id="insertGameForm" type="insert" fields="name" buttonContent="create"}}
+</template>
+
+<template name="userPill">
+  <span class="label">{{publicUsername}}</span>
+</template>
+
+<template name="updateGame">
+  <h3>Change game name</h3>
+  <div>
+    {{> quickForm collection="Games" doc=this id="updateGameForm" type="update" fields="name" buttonContent="Change name"}}
+  </div>
+</template>
+
+<template name="deleteGame">
+  <h3>Delete game</h3>
+  <div>
+    <!--<button class="deleteButton">Delete</button>-->
+    <!--{{> afDeleteButton collection="Games" doc=this}}-->
+    {{> quickRemoveButton collection="Games" _id=this._id beforeRemove=beforeRemove}}
+  </div>
 </template>

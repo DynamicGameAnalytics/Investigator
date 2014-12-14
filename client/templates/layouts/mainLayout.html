@@ -9,20 +9,13 @@
         <core-item icon="add" label="New Game">
           {{#linkTo route="newGame"}}{{/linkTo}}
         </core-item>
-        <!-- <core-submenu icon="apps" label="My Games">
-          {{#each games}}
-          <core-item label="{{name}}">
-            {{#linkTo route="game.show" data=this}}{{/linkTo}}
-          </core-item>
-          {{/each}}
-        </core-submenu> -->
       </core-menu>
     </core-header-panel>
-    <!-- <div tool horizontal layout flex>
-      {{> loginButtons}}
-    </div> -->
     <div tool flex>
       {{> yield "title"}}
+    </div>
+    <div tool flex>
+      {{> loginButtons}}
     </div>
     <div class="content" fit>
       {{> yield}}
