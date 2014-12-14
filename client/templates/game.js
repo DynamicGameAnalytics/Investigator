@@ -208,3 +208,15 @@ Template.game.settings = function() {
    ]
   }
 };
+
+Template.deleteGame.helpers({
+  beforeRemove: function () {
+    return function (collection, id) {
+      var doc = collection.findOne(id);
+      if (confirm('Really delete game "' + doc.name + '"?')) {
+        this.remove();
+        Router.go("/");
+      }
+    };
+  }
+});
