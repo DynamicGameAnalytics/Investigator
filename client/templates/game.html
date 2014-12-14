@@ -111,16 +111,20 @@
       </ul>
 
     </div>
-    {{> updateGame}} {{> deleteGame}}
+
+    <!-- <h3>Change game name</h3>
+    <div>
+      {{> quickForm collection="Games" doc=this id="updateGameForm" type="update" fields="name" buttonContent="Change name"}}
+    </div>
+    <h3>Delete game</h3>
+    <div>
+      {{> quickRemoveButton collection="Games" _id=this._id beforeRemove=beforeRemove}}
+    </div> -->
   </paper-card>
   {{/if}}
 </template>
 
 <template name="insertGameForm">
-  <!-- <form>
-    <input type="text" name="name">
-    <input type="submit" value="create game">
-  </form> -->
   {{> quickForm collection="Games" id="insertGameForm" type="insert" fields="name" buttonContent="create"}}
 </template>
 
@@ -138,8 +142,6 @@
 <template name="deleteGame">
   <h3>Delete game</h3>
   <div>
-    <!--<button class="deleteButton">Delete</button>-->
-    <!--{{> afDeleteButton collection="Games" doc=this}}-->
-    {{> quickRemoveButton collection="Games" _id=this._id beforeRemove=beforeRemove}}
+    <!-- {{> quickRemoveButton collection="Games" _id=this._id beforeRemove=beforeRemove}} -->
   </div>
 </template>

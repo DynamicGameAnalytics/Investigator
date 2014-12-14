@@ -1,7 +1,7 @@
 <template name="mainLayout">
   <core-scaffold>
     <core-header-panel navigation flex mode="seamed">
-      <core-toolbar>Investigator</core-toolbar>
+      <core-toolbar>Investigator {{> loginButtons}}</core-toolbar>
       <core-menu>
         <core-item icon="dashboard" label="Dashboard">
           {{#linkTo route="dashboard"}}{{/linkTo}}
@@ -14,11 +14,11 @@
     <div tool flex>
       {{> yield "title"}}
     </div>
-    <div tool flex>
-      {{> loginButtons}}
-    </div>
-    <div class="content" fit>
-      {{> yield}}
+    <div fit>
+      <div class="content">
+        {{> yield}}
+      </div>
     </div>
   </core-scaffold>
+  <!-- {{> floatingActionMenu}} -->
 </template>
