@@ -108,7 +108,7 @@
       </li>
       {{/each}}
     </ul>
-
+    {{> updateGame}}
   {{/if}}
 </template>
 
@@ -122,4 +122,9 @@
 
 <template name="userPill">
     <span class="label">{{publicUsername}}</span>
+</template>
+
+<template name="updateGame">
+  <h3>Change game name</h3>
+  {{> quickForm collection="Games" doc=this id="updateGameForm" type="update" fields="name" buttonContent="Change name"}}
 </template>
