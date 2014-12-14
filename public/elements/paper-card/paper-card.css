@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  border-radius: 2px;
+  background-color: #fff;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Roboto' sans-serif;
+}
+
+.image {
+  position: relative;
+  width: 100%;
+}
+.content ::content *{
+  margin: 0px;
+}
+.content ::content > div{
+  margin: 16px;
+}
+.content .image ::content h1 {
+  color: #fff;
+  position: absolute;
+  bottom: 0px;
+  margin: 16px;
+  font-weight: normal;
+}
+.content .image ::content img {
+  width: 100%;
+}
+.content ::content > p {
+  padding: 16px;
+}
+.content ::content > span {
+  padding: 16px;
+}
+.content core-menu {
+  margin: 0;
+}
+
+/*polyfill-next-selector { content: '.content .actions > *' }*/
+/*.content ::content .actions .action {
+  padding: 16px;
+}*/

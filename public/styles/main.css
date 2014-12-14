@@ -6,3 +6,26 @@ html, body {
 core-header-panel {
   height: 100%;
 }
+
+.content {
+  margin: 16px;
+}
+
+.game-card {
+  width: calc(25% - 16px);
+  margin-bottom: 16px;
+  margin-right: 16px;
+}
+
+.games {
+  margin-right: -16px;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+a :hover {
+  color: #222;
+}

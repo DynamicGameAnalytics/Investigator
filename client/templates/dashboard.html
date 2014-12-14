@@ -1,23 +1,29 @@
 <template name="dashboard">
+  {{#contentFor "title"}} Dashboard {{/contentFor}}
+
   <h1>My games</h1>
-  <ul>
+  <div class="games" horizontal layout wrap>
     {{#each games}}
-    <li>
-      {{#linkTo route="game.show" data=this}}
-        {{name}}
-      {{/linkTo}}
-    </li>
+    <paper-card class="game-card" z=1>
+      <img src="http://placehold.it/1920x1080" />
+      <h1>{{name}}</h1>
+      <paper-item>
+        {{#linkTo route="game.show" data=this}}Details{{/linkTo}}
+      </paper-item>
+      <paper-item>
+        {{#linkTo route="game.show" data=this}}Action{{/linkTo}}
+      </paper-item>
+    </paper-card>
     {{/each}}
-  </ul>
+
+  </div>
   {{> insertGameForm}}
 
   <h2>Public games</h2>
-  	<ul>
+  <ul>
     {{#each publicGames}}
     <li>
-      {{#linkTo route="game.show" data=this}}
-        {{name}}
-      {{/linkTo}}
+      {{#linkTo route="game.show" data=this}} {{name}} {{/linkTo}}
     </li>
     {{/each}}
   </ul>

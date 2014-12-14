@@ -1,101 +1,101 @@
 <template name="game">
+
+  {{#contentFor "title"}} {{name}} {{/contentFor}}
+
   <h1>{{name}}</h1>
   <p>
     token: {{_id}}
   </p>
   <h2>Records</h2>
-  <!-- <ul>
-    {{#each records}}
-      <li>
-        {{fromNow createdAt}}: {{event.type}}
-      </li>
-    {{/each}}
-  </ul> -->
-  Show data for the last
-  <select id="recordsGraphDataInterval">
-    <option value="m" selected={{sessionEquals "graphs.records.dataInterval" "m"}}>
-      Minute
-    </option>
-    <option value="h" selected={{sessionEquals "graphs.records.dataInterval" "h"}}>
-      Hour
-    </option>
-    <option value="d" selected={{sessionEquals "graphs.records.dataInterval" "d"}}>
-      Day
-    </option>
-    <option value="w" selected={{sessionEquals "graphs.records.dataInterval" "w"}}>
-      Week
-    </option>
-    <option value="M" selected={{sessionEquals "graphs.records.dataInterval" "M"}}>
-      Month
-    </option>
-    <option value="y" selected={{sessionEquals "graphs.records.dataInterval" "y"}}>
-      Year
-    </option>
-  </select>
-  , auto-update every
-  <select id="recordsGraphUpdateInterval">
-    <option value="s" selected={{sessionEquals "graphs.records.updateInterval" "s"}}>
-      Second
-    </option>
-    <option value="m" selected={{sessionEquals "graphs.records.updateInterval" "m"}}>
-      Minute
-    </option>
-    <option value="h" selected={{sessionEquals "graphs.records.updateInterval" "h"}}>
-      Hour
-    </option>
-  </select>
-  , group data by
-  <select id="recordsGraphDataUnit">
-    <option value="s" selected={{sessionEquals "graphs.records.dataUnit" "s"}}>
-      Second
-    </option>
-    <option value="m" selected={{sessionEquals "graphs.records.dataUnit" "m"}}>
-      Minute
-    </option>
-    <option value="h" selected={{sessionEquals "graphs.records.dataUnit" "h"}}>
-      Hour
-    </option>
-    <option value="d" selected={{sessionEquals "graphs.records.dataUnit" "d"}}>
-      Day
-    </option>
-    <option value="w" selected={{sessionEquals "graphs.records.dataUnit" "w"}}>
-      Week
-    </option>
-    <option value="M" selected={{sessionEquals "graphs.records.dataUnit" "M"}}>
-      Month
-    </option>
-    <option value="y" selected={{sessionEquals "graphs.records.dataUnit" "y"}}>
-      Year
-    </option>
-  </select>
+  <paper-card z=2>
+    <div>
+      Show data for the last
+      <select id="recordsGraphDataInterval">
+        <option value="m" selected={{sessionEquals "graphs.records.dataInterval" "m"}}>
+          Minute
+        </option>
+        <option value="h" selected={{sessionEquals "graphs.records.dataInterval" "h"}}>
+          Hour
+        </option>
+        <option value="d" selected={{sessionEquals "graphs.records.dataInterval" "d"}}>
+          Day
+        </option>
+        <option value="w" selected={{sessionEquals "graphs.records.dataInterval" "w"}}>
+          Week
+        </option>
+        <option value="M" selected={{sessionEquals "graphs.records.dataInterval" "M"}}>
+          Month
+        </option>
+        <option value="y" selected={{sessionEquals "graphs.records.dataInterval" "y"}}>
+          Year
+        </option>
+      </select>
+      , auto-update every
+      <select id="recordsGraphUpdateInterval">
+        <option value="s" selected={{sessionEquals "graphs.records.updateInterval" "s"}}>
+          Second
+        </option>
+        <option value="m" selected={{sessionEquals "graphs.records.updateInterval" "m"}}>
+          Minute
+        </option>
+        <option value="h" selected={{sessionEquals "graphs.records.updateInterval" "h"}}>
+          Hour
+        </option>
+      </select>
+      , group data by
+      <select id="recordsGraphDataUnit">
+        <option value="s" selected={{sessionEquals "graphs.records.dataUnit" "s"}}>
+          Second
+        </option>
+        <option value="m" selected={{sessionEquals "graphs.records.dataUnit" "m"}}>
+          Minute
+        </option>
+        <option value="h" selected={{sessionEquals "graphs.records.dataUnit" "h"}}>
+          Hour
+        </option>
+        <option value="d" selected={{sessionEquals "graphs.records.dataUnit" "d"}}>
+          Day
+        </option>
+        <option value="w" selected={{sessionEquals "graphs.records.dataUnit" "w"}}>
+          Week
+        </option>
+        <option value="M" selected={{sessionEquals "graphs.records.dataUnit" "M"}}>
+          Month
+        </option>
+        <option value="y" selected={{sessionEquals "graphs.records.dataUnit" "y"}}>
+          Year
+        </option>
+      </select>
 
-  <div id="records-graph"></div>
-  <!-- <div id="records-slider"></div> -->
+      <div id="records-graph"></div>
 
-  <h2>Errors</h2>
+    </div>
+  </paper-card>
+
+  <!-- <h2>Errors</h2>
   <ul>
     {{#each errors}}
     <li>
       {{fromNow createdAt}}: {{error.type}}
     </li>
     {{/each}}
-  </ul>
+  </ul> -->
 
   {{#if isOwner}}
   <h2>Settings</h2>
+  <paper-card>
     <p>
       <label>
-        <input type="checkbox" checked="{{isSharableByLink}}" class="toggleIsSharableByLink" />
-          Is sharable by link
+        <input type="checkbox" checked="{{isSharableByLink}}" class="toggleIsSharableByLink" /> Is sharable by link
       </label>
     </p>
 
     <p>
       <label>
-        <input type="checkbox" checked="{{isPublic}}" class="toggleIsPublic" />
-          Is public for everyone
+        <input type="checkbox" checked="{{isPublic}}" class="toggleIsPublic" /> Is public for everyone
       </label>
     </p>
+  </paper-card>
   {{/if}}
 </template>
 
