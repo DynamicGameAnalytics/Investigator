@@ -2,6 +2,7 @@ Meteor.publish('gameSharedToMe', function(game_id) {
   var user = Meteor.users.findOne({_id: this.userId});
   if(!user){
     console.log("error " + this.userId);
+    return [];
   }
   var sharedToMe = GameSharedToUser.find({    
     sharedToUser: user.publicUsername
