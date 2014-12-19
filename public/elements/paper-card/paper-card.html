@@ -2,12 +2,12 @@
 <link rel="import" href="/components/paper-shadow/paper-shadow.html">
 <link rel="import" href="/components/core-menu/core-menu.html">
 
-<polymer-element name="paper-card" attributes="z">
+<polymer-element name="paper-card" attributes="z header-height">
   <template>
     <link rel="stylesheet" href="paper-card.css">
     <paper-shadow z="{{z}}"></paper-shadow>
     <div class="content">
-      <div class="image">
+      <div class="image" style="height: {{['header-height']}};">
         <content select="img"></content>
         <content select="h1"></content>
       </div>
@@ -24,6 +24,7 @@
 
       Polymer({
         z: 1,
+        'header-height': '100%'
       });
 
     })();

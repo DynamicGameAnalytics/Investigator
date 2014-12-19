@@ -11,8 +11,11 @@ accounts-github
 accounts-google
 accounts-facebook
 accounts-twitter
-fcallem:rickshaw
 aldeed:autoform
 mizzao:autocomplete
 aldeed:delete-button
 houston:admin
+cfs:standard-packages
+cfs:filesystem
+cfs:ejson-file
+

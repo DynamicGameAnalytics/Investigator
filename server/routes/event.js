@@ -1,20 +1,15 @@
-Router.route('/event/:session_token', {
+Router.route('/event/:session_token/:event_type', {
     where: 'server',
     name: 'event'
   })
-  .post(function() {
+  .get(function() {
     var session_token = this.params.session_token;
+    var event_type = this.params.event_type;
 
-    // var eventString = this.request.body.event;
-    // var eventData = JSON.parse(eventString);
-    var eventData = this.request.body.event;
-
-    if (!eventData) {
-      this.response.statusCode = 400;
-      return this.response.end(JSON.stringify({
-        error: 'event object required'
-      }));
-    }
+    this.response.setHeader('Access-Control-Allow-Origin', '*');
+    this.response.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    this.response.setHeader('Access-Control-Allow-Credentials', 'FALSE');
+    this.response.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 
     var session = Sessions.findOne(session_token);
     if (!session) {
@@ -27,7 +22,11 @@ Router.route('/event/:session_token', {
     Records.insert({
       game: session.game_token,
       session: session._id,
-      event: eventData
+      event: {
+        type: event_type
+      }
     });
-    this.response.end(JSON.stringify(eventData));
+    this.response.end(JSON.stringify({
+      type: event_type
+    }));
   });

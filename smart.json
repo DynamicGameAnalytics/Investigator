@@ -4,7 +4,6 @@
   },
   "bower": {
     "moment": "*",
-    "rickshaw": "*",
     "polymer": {
       "source": "Polymer/polymer",
       "version": "latest"

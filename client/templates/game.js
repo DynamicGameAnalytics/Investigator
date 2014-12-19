@@ -1,4 +1,8 @@
 function setChartData() {
+  var element = document.querySelector('#records-graph');
+  if (!element){
+    return;
+  }
   var start = moment();
 
   var dataStart = moment().subtract(1, Session.get('graphs.records.dataInterval'));
@@ -37,11 +41,10 @@ function setChartData() {
     ++rawData[timeString][type];
     types.push(type);
   });
-  if (types.length === 0){
+  if (types.length === 0) {
     types.push('no data');
   }
 
-  var element = document.querySelector('#records-graph');
 
   _.uniq(types).forEach(function(type) {
     cols.push({
@@ -145,6 +148,27 @@ Template.game.events({
     GameSharedToUser.remove({
       _id: this._id
     });
+  },
+  "change #fileUpload": function(evt) {
+    var self = this;
+    _.each(evt.target.files, function(file) {
+      Files.insert(file, function(err, result) {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        Games.update(self._id, {
+          $set: {
+            coverID: result._id
+          }
+        }, function(err, num) {
+          if (err) {
+            console.error(err);
+            return;
+          }
+        });
+      });
+    }, this);
   }
 });
 
@@ -164,7 +188,11 @@ Template.game.helpers({
         template: Template.userPill
       }, ]
     }
-  }
+  },
+  // cover: function(){
+  //   var cover = Files.findOne(this.coverID);
+  //   return cover;
+  // }
 });
 
 Template.deleteGame.helpers({

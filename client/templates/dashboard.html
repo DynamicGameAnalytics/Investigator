@@ -6,7 +6,11 @@
   <div class="games" horizontal layout wrap>
     {{#each games}}
     <paper-card class="game-card" z=1>
+      {{#if cover}}
+      <img src="{{cover.url}}" />
+      {{else}}
       <img src="http://placehold.it/1920x1080" />
+      {{/if}}
       <h1>{{name}}</h1>
       <paper-item>
         {{#linkTo route="game.show" data=this}}Details{{/linkTo}}

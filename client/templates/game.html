@@ -2,10 +2,22 @@
 
   {{#contentFor "title"}} {{name}} {{/contentFor}}
 
-  <h1>{{name}}</h1>
-  <p>
-    token: {{_id}}
-  </p>
+  <paper-card header-height="150px">
+    {{#if cover}}
+    <img src="{{cover.url}}" />
+    {{else}}
+    <img src="http://placehold.it/1920x1080}" />
+    {{/if}}
+    <h1>{{name}}</h1>
+    <p>
+      token: {{_id}}
+    </p>
+    <p>
+      coverID: {{coverID}}
+    </p>
+  </paper-card>
+  <input type="file" id="fileUpload"/>
+
   <h2>Records</h2>
   <paper-card z=2>
     <div>
@@ -68,11 +80,8 @@
       </select>
 
       <!-- <div id="records-graph"></div> -->
-      <google-chart
-      id="records-graph"
-      class="chart"
-      type='area'>
-    </google-chart>
+      <google-chart id="records-graph" class="chart" type='area'>
+      </google-chart>
 
     </div>
   </paper-card>

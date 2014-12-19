@@ -10,6 +10,7 @@
 .image {
   position: relative;
   width: 100%;
+  max-height: 100%;
 }
 .content ::content *{
   margin: 0px;
@@ -36,6 +37,9 @@
 }
 .content .image ::content img {
   width: 100%;
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
 }
 .content ::content > p {
   padding: 16px;
