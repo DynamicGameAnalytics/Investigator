@@ -1,8 +1,3 @@
-# Meteor packages used by this project, one per line.
-#
-# 'meteor add' and 'meteor remove' will edit this file for you,
-# but you can also edit it by hand.
-
 meteor-platform
 insecure
 iron:router
@@ -16,8 +11,11 @@ accounts-github
 accounts-google
 accounts-facebook
 accounts-twitter
-fcallem:rickshaw
 aldeed:autoform
 mizzao:autocomplete
 aldeed:delete-button
+houston:admin
+cfs:standard-packages
+cfs:filesystem
+cfs:ejson-file
 

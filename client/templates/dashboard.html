@@ -1,37 +1,54 @@
 <template name="dashboard">
+  {{#contentFor "title"}} Dashboard {{/contentFor}}
+
   <h1>My games</h1>
-  <ul>
+  {{#if games}}
+  <div class="games" horizontal layout wrap>
     {{#each games}}
-    <li>
-      {{#linkTo route="game.show" data=this}}
-        {{name}}
-      {{/linkTo}}
-    </li>
+    <paper-card class="game-card" z=1>
+      {{#if cover}}
+      <img src="{{cover.url}}" />
+      {{else}}
+      <img src="http://placehold.it/1920x1080" />
+      {{/if}}
+      <h1>{{name}}</h1>
+      <paper-item>
+        {{#linkTo route="game.show" data=this}}Details{{/linkTo}}
+      </paper-item>
+    </paper-card>
     {{/each}}
-  </ul>
+
+  </div>
+  {{/if}}
   {{> insertGameForm}}
 
-
-  <h2>Games shared to me </h2>
-    <ul>
+  {{#if gameSharedToMe.count}}
+  <h2>Games shared with me </h2>
+  <div class="games">
     {{#each gameSharedToMe}}
-    <li>
-      {{#linkTo route="game.show" data=this}}
-        {{name}}
-      {{/linkTo}}
-    </li>
+    <paper-card class="game-card" z=1>
+      <img src="http://placehold.it/1920x1080" />
+      <h1>{{name}}</h1>
+      <paper-item>
+        {{#linkTo route="game.show" data=this}}Details{{/linkTo}}
+      </paper-item>
+    </paper-card>
     {{/each}}
-  </ul>
+  </div>
+  {{/if}}
 
-
+  {{#if publicGames.count}}
   <h2>Public games</h2>
-  	<ul>
+  <div class="games">
     {{#each publicGames}}
-    <li>
-      {{#linkTo route="game.show" data=this}}
-        {{name}}
-      {{/linkTo}}
-    </li>
+    <paper-card class="game-card" z=1>
+      <img src="http://placehold.it/1920x1080/D7CCC8/EFEBE9" />
+      <h1>{{name}}</h1>
+      <paper-item>
+        {{#linkTo route="game.show" data=this}}Details{{/linkTo}}
+      </paper-item>
+    </paper-card>
     {{/each}}
-  </ul>
+  </div>
+  {{/if}}
 </template>

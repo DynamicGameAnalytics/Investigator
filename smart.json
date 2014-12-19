@@ -3,6 +3,18 @@
     "bower": {}
   },
   "bower": {
-    "moment": "*"
+    "moment": "*",
+    "polymer": {
+      "source": "Polymer/polymer",
+      "version": "latest"
+    },
+    "core-elements": {
+      "source": "Polymer/core-elements",
+      "version": "latest"
+    },
+    "paper-elements": {
+      "source": "Polymer/paper-elements",
+      "version": "latest"
+    }
   }
 }

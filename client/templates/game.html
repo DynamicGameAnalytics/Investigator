@@ -1,138 +1,161 @@
 <template name="game">
-  <h1>{{name}}</h1>
-  <p>
-    token: {{_id}}
-  </p>
+
+  {{#contentFor "title"}} {{name}} {{/contentFor}}
+
+  <paper-card header-height="150px">
+    {{#if cover}}
+    <img src="{{cover.url}}" />
+    {{else}}
+    <img src="http://placehold.it/1920x1080}" />
+    {{/if}}
+    <h1>{{name}}</h1>
+    <p>
+      token: {{_id}}
+    </p>
+    <p>
+      coverID: {{coverID}}
+    </p>
+  </paper-card>
+  <input type="file" id="fileUpload"/>
+
   <h2>Records</h2>
-  <!-- <ul>
-    {{#each records}}
-      <li>
-        {{fromNow createdAt}}: {{event.type}}
-      </li>
-    {{/each}}
-  </ul> -->
-  Show data for the last
-  <select id="recordsGraphDataInterval">
-    <option value="m" selected={{sessionEquals "graphs.records.dataInterval" "m"}}>
-      Minute
-    </option>
-    <option value="h" selected={{sessionEquals "graphs.records.dataInterval" "h"}}>
-      Hour
-    </option>
-    <option value="d" selected={{sessionEquals "graphs.records.dataInterval" "d"}}>
-      Day
-    </option>
-    <option value="w" selected={{sessionEquals "graphs.records.dataInterval" "w"}}>
-      Week
-    </option>
-    <option value="M" selected={{sessionEquals "graphs.records.dataInterval" "M"}}>
-      Month
-    </option>
-    <option value="y" selected={{sessionEquals "graphs.records.dataInterval" "y"}}>
-      Year
-    </option>
-  </select>
-  , auto-update every
-  <select id="recordsGraphUpdateInterval">
-    <option value="s" selected={{sessionEquals "graphs.records.updateInterval" "s"}}>
-      Second
-    </option>
-    <option value="m" selected={{sessionEquals "graphs.records.updateInterval" "m"}}>
-      Minute
-    </option>
-    <option value="h" selected={{sessionEquals "graphs.records.updateInterval" "h"}}>
-      Hour
-    </option>
-  </select>
-  , group data by
-  <select id="recordsGraphDataUnit">
-    <option value="s" selected={{sessionEquals "graphs.records.dataUnit" "s"}}>
-      Second
-    </option>
-    <option value="m" selected={{sessionEquals "graphs.records.dataUnit" "m"}}>
-      Minute
-    </option>
-    <option value="h" selected={{sessionEquals "graphs.records.dataUnit" "h"}}>
-      Hour
-    </option>
-    <option value="d" selected={{sessionEquals "graphs.records.dataUnit" "d"}}>
-      Day
-    </option>
-    <option value="w" selected={{sessionEquals "graphs.records.dataUnit" "w"}}>
-      Week
-    </option>
-    <option value="M" selected={{sessionEquals "graphs.records.dataUnit" "M"}}>
-      Month
-    </option>
-    <option value="y" selected={{sessionEquals "graphs.records.dataUnit" "y"}}>
-      Year
-    </option>
-  </select>
+  <paper-card z=2>
+    <div>
+      Show data for the last
+      <select id="recordsGraphDataInterval">
+        <option value="m" selected={{sessionEquals "graphs.records.dataInterval" "m"}}>
+          Minute
+        </option>
+        <option value="h" selected={{sessionEquals "graphs.records.dataInterval" "h"}}>
+          Hour
+        </option>
+        <option value="d" selected={{sessionEquals "graphs.records.dataInterval" "d"}}>
+          Day
+        </option>
+        <option value="w" selected={{sessionEquals "graphs.records.dataInterval" "w"}}>
+          Week
+        </option>
+        <option value="M" selected={{sessionEquals "graphs.records.dataInterval" "M"}}>
+          Month
+        </option>
+        <option value="y" selected={{sessionEquals "graphs.records.dataInterval" "y"}}>
+          Year
+        </option>
+      </select>
+      , auto-update every
+      <select id="recordsGraphUpdateInterval">
+        <option value="s" selected={{sessionEquals "graphs.records.updateInterval" "s"}}>
+          Second
+        </option>
+        <option value="m" selected={{sessionEquals "graphs.records.updateInterval" "m"}}>
+          Minute
+        </option>
+        <option value="h" selected={{sessionEquals "graphs.records.updateInterval" "h"}}>
+          Hour
+        </option>
+      </select>
+      , group data by
+      <select id="recordsGraphDataUnit">
+        <option value="s" selected={{sessionEquals "graphs.records.dataUnit" "s"}}>
+          Second
+        </option>
+        <option value="m" selected={{sessionEquals "graphs.records.dataUnit" "m"}}>
+          Minute
+        </option>
+        <option value="h" selected={{sessionEquals "graphs.records.dataUnit" "h"}}>
+          Hour
+        </option>
+        <option value="d" selected={{sessionEquals "graphs.records.dataUnit" "d"}}>
+          Day
+        </option>
+        <option value="w" selected={{sessionEquals "graphs.records.dataUnit" "w"}}>
+          Week
+        </option>
+        <option value="M" selected={{sessionEquals "graphs.records.dataUnit" "M"}}>
+          Month
+        </option>
+        <option value="y" selected={{sessionEquals "graphs.records.dataUnit" "y"}}>
+          Year
+        </option>
+      </select>
 
-  <div id="records-graph"></div>
-  <!-- <div id="records-slider"></div> -->
+      <!-- <div id="records-graph"></div> -->
+      <google-chart id="records-graph" class="chart" type='area'>
+      </google-chart>
 
-  <h2>Errors</h2>
+    </div>
+  </paper-card>
+
+  <!-- <h2>Errors</h2>
   <ul>
     {{#each errors}}
     <li>
       {{fromNow createdAt}}: {{error.type}}
     </li>
     {{/each}}
-  </ul>
+  </ul> -->
 
   {{#if isOwner}}
   <h2>Settings</h2>
+  <paper-card>
     <p>
       <label>
-        <input type="checkbox" checked="{{isSharableByLink}}" class="toggleIsSharableByLink" />
-          Is sharable by link
+        <input type="checkbox" checked="{{isSharableByLink}}" class="toggleIsSharableByLink" /> Is sharable by link
       </label>
     </p>
 
     <p>
       <label>
-        <input type="checkbox" checked="{{isPublic}}" class="toggleIsPublic" />
-          Is public for everyone
+        <input type="checkbox" checked="{{isPublic}}" class="toggleIsPublic" /> Is public for everyone
       </label>
     </p>
 
     <h3>Share to specific user</h3>
-    {{> inputAutocomplete settings=settings id="inputShareToUser" class="inputShareToUser" placeholder="Share to user..."}} 
-    <button class="shareToUser">Share game with user</button>  
+    <div>
+      {{> inputAutocomplete settings=settings id="inputShareToUser" class="inputShareToUser" placeholder="Share to user..."}}
+      <button class="shareToUser">Share game with user</button>
 
-    <ul>
-      {{#each this.gameSharedToUser}}
-      <li>
-        {{sharedToUser}} <button class="deleteShare">&times;</button>
-      </li>
-      {{/each}}
-    </ul>
-    {{> updateGame}}
-    {{> deleteGame}}
+      <ul>
+        {{#each this.gameSharedToUser}}
+        <li>
+          {{sharedToUser}}
+          <button class="deleteShare">&times;</button>
+        </li>
+        {{/each}}
+      </ul>
+
+    </div>
+
+    <!-- <h3>Change game name</h3>
+    <div>
+      {{> quickForm collection="Games" doc=this id="updateGameForm" type="update" fields="name" buttonContent="Change name"}}
+    </div>
+    <h3>Delete game</h3>
+    <div>
+      {{> quickRemoveButton collection="Games" _id=this._id beforeRemove=beforeRemove}}
+    </div> -->
+  </paper-card>
   {{/if}}
 </template>
 
 <template name="insertGameForm">
-  <!-- <form>
-    <input type="text" name="name">
-    <input type="submit" value="create game">
-  </form> -->
   {{> quickForm collection="Games" id="insertGameForm" type="insert" fields="name" buttonContent="create"}}
 </template>
 
 <template name="userPill">
-    <span class="label">{{publicUsername}}</span>
+  <span class="label">{{publicUsername}}</span>
 </template>
 
 <template name="updateGame">
   <h3>Change game name</h3>
-  {{> quickForm collection="Games" doc=this id="updateGameForm" type="update" fields="name" buttonContent="Change name"}}
+  <div>
+    {{> quickForm collection="Games" doc=this id="updateGameForm" type="update" fields="name" buttonContent="Change name"}}
+  </div>
 </template>
 
 <template name="deleteGame">
   <h3>Delete game</h3>
-  <!--<button class="deleteButton">Delete</button>-->
-  <!--{{> afDeleteButton collection="Games" doc=this}}-->
-  {{> quickRemoveButton collection="Games" _id=this._id beforeRemove=beforeRemove}}
+  <div>
+    <!-- {{> quickRemoveButton collection="Games" _id=this._id beforeRemove=beforeRemove}} -->
+  </div>
 </template>

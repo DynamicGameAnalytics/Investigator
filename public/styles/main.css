@@ -1,1 +1,42 @@
-/* CSS declarations go here */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+core-header-panel {
+  height: 100%;
+}
+
+.content {
+  /*margin: 16px;*/
+  padding: 16px;
+}
+
+.game-card {
+  width: calc(25% - 16px);
+  margin-bottom: 16px;
+  margin-right: 16px;
+}
+
+.chart {
+  width: 100%;
+}
+
+.games {
+  margin-right: -16px;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+a :hover {
+  color: #222;
+}
+
+#floatingActionMenu {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+}
