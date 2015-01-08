@@ -1,0 +1,26 @@
+{
+  "name": "Investigator",
+  "version": "0.0.0",
+  "homepage": "https://github.com/DynamicGameAnalytics/Investigator",
+  "authors": [
+    "Lukas Höppner <lukas.hoeppner@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "~2.9.0",
+    "polymer": "Polymer/polymer#~0.5.2",
+    "core-elements": "Polymer/core-elements#~0.5.2",
+    "paper-elements": "Polymer/paper-elements#~0.5.2",
+    "file-input": "~1.1.4",
+    "google-chart": "GoogleWebComponents/google-chart#~0.2.1"
+  }
+}

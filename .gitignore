@@ -1,3 +1,4 @@
 .meteor/local
 build
-public/components
+public/components/*
+!public/components/meteor-bower

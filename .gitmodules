@@ -1,0 +1,3 @@
+[submodule "packages/meteor-bower"]
+	path = packages/meteor-bower
+	url = https://github.com/gbisheimer/meteor-bower.git
